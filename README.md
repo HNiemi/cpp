@@ -6,7 +6,9 @@ Given two strings S and T, return if they are equal when both are typed into emp
 Note that after backspacing an empty text, the text will continue empty.
 ### Example:
 Input: S = "ab#c", T = "ad#c"
+
 Output: true
+
 Explanation: Both S and T become "ac".
 ### My Solution:
 class Solution {
