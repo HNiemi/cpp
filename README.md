@@ -4,7 +4,7 @@ A collection of my C++ coding challenges I have completed through online resourc
 ## Single Number
 Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 
-Note:Your algorithm should have a linear runtime complexity.
+Note: Your algorithm should have a linear runtime complexity.
 ### Example:
 Input: [4,1,2,1,2]
 
