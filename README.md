@@ -12,9 +12,8 @@ Output: true
 
 Explanation: Both S and T become "ac".
 ### My Solution:
-class Solution {
-public:
-    bool backspaceCompare(string S, string T) {
+```markdown
+bool backspaceCompare(string S, string T) {
         stack<char> stackS;
         stack<char> stackT;
 
@@ -39,5 +38,5 @@ public:
             }
         }
         return stackS == stackT;
-    }
-};
+}
+```
