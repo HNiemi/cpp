@@ -181,55 +181,47 @@ public:
     }
 };
 ```
-## Remove Nth Node From End of Linked List
+## Number of Islands
 Difficulty: Medium
 
-Given a linked list, remove the n-th node from the end of list and return its head.
+Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
 ### Example:
-Given linked list: 1->2->3->4->5, and n = 2.
-
-After removing the second node from the end, the linked list becomes 1->2->3->5.
+Input:
+```markdown
+11000
+11000
+00100
+00011
+```
+Output: 3
 ### My Solution:
 ```markdown
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        if (head->next == NULL) {
-            return NULL;
+    void dfs(vector<vector<char>>& grid, int r, int c) {
+        int row_size = grid.size();
+        int col_size = grid[0].size();
+        if (r < 0 || c < 0 || r >= row_size || c >= col_size || grid[r][c] == '0') {
+            return;
         }
-
-        ListNode* first = head;
-        ListNode* second = head;
-        for(int i = 0; i < n; i++) {
-            first = first->next;
-        }
-        if (first == NULL) {
-            second = second->next;
-            return second;
-        }
-        else {
-            while (first->next != NULL) {
-                first = first->next;
-                second = second->next;
+        grid[r][c] = '0';
+        dfs(grid, r + 1, c);
+        dfs(grid, r - 1, c);
+        dfs(grid, r, c + 1);
+        dfs(grid, r, c - 1);
+        
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int result = 0;
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid[i].size(); j++) {
+                if (grid[i][j] == '1') {
+                    result++;
+                    dfs(grid, i, j);
+                }
             }
         }
-        ListNode* temp = second; 
-        if (temp) {
-            temp = temp->next;
-        }
-        if (temp) {
-            temp = temp->next;
-        }
-        second->next = temp;
-        return head;
+        return result;
     }
 };
 ```
