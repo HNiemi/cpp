@@ -79,29 +79,35 @@ Output: 3
 Explanation: 11 = 5 + 5 + 1
 ### My Solution:
 ```markdown
-    int coinChange(vector<int>& coins, int amount) {
-        vector<int> dp;
-        dp.resize(amount + 1);
-        dp[0] = 0;
-        for (int i = 1; i < dp.size(); i++) {
-            dp[i] = INT_MAX;
-        }
-        for (int i = 1; i < amount + 1; i++) {
-            for (int j = 0; j < coins.size(); j++) {
-                if(coins[j] <= i && i - coins[j] >= 0) {
-                    int subres = dp[i - coins[j]];
-                    if (subres != INT_MAX && subres + 1 < dp[i]) {
-                        dp[i] = subres + 1;
-                    }
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) {
+        stack<char> stackS;
+        stack<char> stackT;
+
+        for (int i = 0; i < S.size(); i++) {
+            if (S[i] == '#') {
+                if (!stackS.empty()) {
+                    stackS.pop();
                 }
             }
+            else {
+                stackS.push(S[i]);
+            }
         }
-        
-        if (dp[amount] == INT_MAX) {
-            return -1;
+        for (int i = 0; i < T.size(); i++) {
+            if (T[i] == '#') {
+                if (!stackT.empty()) {
+                    stackT.pop();
+                }
+            }
+            else {
+                stackT.push(T[i]);
+            }
         }
-        return dp[amount];
+        return stackS == stackT;
     }
+};
 ```
 ## Remove Nth Node From End of Linked List
 Difficulty: Medium
